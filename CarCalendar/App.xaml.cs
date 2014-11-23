@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 //directives
 using CarCalendar.Model;
-
+using CarCalendar.ViewModel;
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
 namespace CarCalendar
@@ -30,7 +30,12 @@ namespace CarCalendar
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
-        public CarFixDataContext db;
+        public CarFixModel db;
+        private static CarFixViewModel viewModel;
+        public static CarFixViewModel ViewModel
+        {
+            get { return viewModel; }
+        }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -42,7 +47,12 @@ namespace CarCalendar
             this.Suspending += this.OnSuspending;
 
             string DBConnectionString = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "dbsqlite.sqlite");
-            db = new CarFixDataContext(DBConnectionString);
+            db = new CarFixModel(DBConnectionString);
+
+            //Create the View Model
+            viewModel = new CarFixViewModel(DBConnectionString);
+
+            viewModel.LoadCollectionFromDatabase();
 
         }
 

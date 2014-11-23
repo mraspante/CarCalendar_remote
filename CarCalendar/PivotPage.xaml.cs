@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
+using CarCalendar.ViewModel;
 namespace CarCalendar
 {
     public sealed partial class PivotPage : Page
@@ -30,11 +31,13 @@ namespace CarCalendar
 
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
+        //private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
         public PivotPage()
         {
             this.InitializeComponent();
+
+            this.DataContext = App.ViewModel;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
@@ -74,8 +77,8 @@ namespace CarCalendar
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-1");
-            this.DefaultViewModel[FirstGroupName] = sampleDataGroup;
+            var repairsViewModel = await SampleDataSource.GetGroupAsync("Group-1");
+            this.DefaultViewModel[FirstGroupName] = repairsViewModel;
         }
 
         /// <summary>
@@ -96,23 +99,24 @@ namespace CarCalendar
         /// </summary>
         private void AddAppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            string groupName = this.pivot.SelectedIndex == 0 ? FirstGroupName : SecondGroupName;
-            var group = this.DefaultViewModel[groupName] as SampleDataGroup;
-            var nextItemId = group.Items.Count + 1;
-            var newItem = new SampleDataItem(
-                string.Format(CultureInfo.InvariantCulture, "Group-{0}-Item-{1}", this.pivot.SelectedIndex + 1, nextItemId),
-                string.Format(CultureInfo.CurrentCulture, this.resourceLoader.GetString("NewItemTitle"), nextItemId),
-                string.Empty,
-                string.Empty,
-                this.resourceLoader.GetString("NewItemDescription"),
-                string.Empty);
+            //string groupName = this.pivot.SelectedIndex == 0 ? FirstGroupName : SecondGroupName;
+            //var group = this.DefaultViewModel[groupName] as SampleDataGroup;
+            //var nextItemId = group.Items.Count + 1;
+            //var newItem = new SampleDataItem(
+            //    string.Format(CultureInfo.InvariantCulture, "Group-{0}-Item-{1}", this.pivot.SelectedIndex + 1, nextItemId),
+            //    string.Format(CultureInfo.CurrentCulture, this.resourceLoader.GetString("NewItemTitle"), nextItemId),
+            //    string.Empty,
+            //    string.Empty,
+            //    this.resourceLoader.GetString("NewItemDescription"),
+            //    string.Empty);
 
-            group.Items.Add(newItem);
+            //group.Items.Add(newItem);
 
-            // Scroll the new item into view.
-            var container = this.pivot.ContainerFromIndex(this.pivot.SelectedIndex) as ContentControl;
-            var listView = container.ContentTemplateRoot as ListView;
-            listView.ScrollIntoView(newItem, ScrollIntoViewAlignment.Leading);
+            //// Scroll the new item into view.
+            //var container = this.pivot.ContainerFromIndex(this.pivot.SelectedIndex) as ContentControl;
+            //var listView = container.ContentTemplateRoot as ListView;
+            //listView.ScrollIntoView(newItem, ScrollIntoViewAlignment.Leading);
+            Frame.Navigate(typeof(NewItem));
         }
 
         /// <summary>
@@ -122,11 +126,11 @@ namespace CarCalendar
         {
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            if (!Frame.Navigate(typeof(ItemPage), itemId))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
+            //var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+            //if (!frame.navigate(typeof(itempage), itemid))
+            //{
+            //    throw new exception(this.resourceloader.getstring("navigationfailedexceptionmessage"));
+            //}
         }
 
         /// <summary>

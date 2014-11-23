@@ -1,0 +1,77 @@
+﻿<Page
+    x:Class="CarCalendar.NewItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CarCalendar"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" 
+                   VerticalAlignment="Top"
+                   FontSize="30"
+                   Margin="10,10,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="Description" 
+                   Height="40" 
+                   Width="160"/>
+
+        <TextBox   Name="Description"
+                   HorizontalAlignment="left" 
+                   VerticalAlignment="Top"
+                   Height="40" 
+                   Margin="10,50,10,0" 
+                   TextWrapping="Wrap" 
+                   Text=""  
+                   Width= "350"
+                   />
+        <TextBlock HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="30"
+                   Margin="10,100,0,0"
+                   Text="Price"
+                   Height="40"
+                   Width="160"
+                   />
+        <TextBox   Name="Price"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" 
+                   Height="40" 
+                   Margin="10,150,10,0" 
+                   TextWrapping="Wrap" 
+                   Text=""            
+                   Width="350"
+                   />
+        <TextBlock HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="30"
+                   Margin="10,200,0,0"
+                   Text="Date"
+                   Height="40"
+                   Width="160"
+                   />
+        <DatePicker Name="Date"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    FontSize="30"
+                    Margin="10,235,0,0" 
+                    Height="50"
+                    Width="350" DayFormat="{}{dayofweek.full}"
+                    />
+        <Button     Name="AddButton"
+                    Content="Add" 
+                    HorizontalAlignment="Left" 
+                    Margin="10,582,0,0" 
+                    VerticalAlignment="Top" 
+                    RenderTransformOrigin="-0.211,-0.198" 
+                    Click="AddButton_Click"/>
+        
+        <Button     Name="BackButton" 
+                    Content="Back" 
+                    HorizontalAlignment="Left" 
+                    Margin="281,582,0,0" 
+                    VerticalAlignment="Top"/>
+    </Grid>
+</Page>
