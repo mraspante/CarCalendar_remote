@@ -33,10 +33,12 @@ namespace CarCalendar.ViewModel
             }
         }
 
-        public void AddItemToDatabase(CarFix item)
-        {
+        public void AddItemToViewModel(CarFix item)
+        {    
             repairsDB.InsertItem(item);
+            CarFixes.Add(item);
         }
+
         //Get Items from DB
         public void LoadCollectionFromDatabase()
         {

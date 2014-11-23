@@ -86,6 +86,10 @@ namespace CarCalendar.Model
         public void InsertItem(CarFix repair)
         {
             db.Insert(repair);
+            Debug.WriteLine("[Model] - Adding Item to database");
+            var table = db.Table<CarFix>();
+            foreach (var s in table)
+                Debug.WriteLine(s.Id + ") " + s.Description + "-" + s.Price);
         }
 
         public void DeleteItem(CarFix repair)
@@ -166,7 +170,7 @@ namespace CarCalendar.Model
             {
                 if(_date != value)
                 {
-                    Date = value;
+                    _date = value;
                     NotifyPropertyChanged("Date");
                 }
             }

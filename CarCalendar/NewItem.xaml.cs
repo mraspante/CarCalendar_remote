@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CarCalendar.Model;
+using CarCalendar.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -40,8 +41,18 @@ namespace CarCalendar
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             CarFix repair = new CarFix();
+            DateTimeOffset DatePicked;
             repair.Description = this.Description.Text;
-            repair.Price = System.Convert.ToDecimal(this.Price.Text);           
+            repair.Price = System.Convert.ToDecimal(this.Price.Text);
+            DatePicked = this.Date.Date;
+            repair.Date = DatePicked.Date;
+            App.ViewModel.AddItemToViewModel(repair);
+            Frame.GoBack();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
         }
     }
 }
